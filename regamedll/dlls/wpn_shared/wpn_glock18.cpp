@@ -43,6 +43,7 @@ void CGLOCK18::Precache()
 	PRECACHE_SOUND("weapons/357_cock1.wav");
 	PRECACHE_SOUND("weapons/de_clipin.wav");
 	PRECACHE_SOUND("weapons/de_clipout.wav");
+	PRECACHE_SOUND("weapons/switch.wav");
 
 	m_iShellId = m_iShell = PRECACHE_MODEL("models/pshell.mdl");
 	m_usFireGlock18 = PRECACHE_EVENT(1, "events/glock18.sc");
@@ -101,11 +102,13 @@ void CGLOCK18::SecondaryAttack()
 	{
 		ClientPrint(m_pPlayer->pev, HUD_PRINTCENTER, "#Switch_To_SemiAuto");
 		m_iWeaponState &= ~WPNSTATE_GLOCK18_BURST_MODE;
+		EMIT_SOUND(ENT(pev), CHAN_WEAPON, "weapons/switch.wav", VOL_NORM, ATTN_NORM);
 	}
 	else
 	{
 		ClientPrint(m_pPlayer->pev, HUD_PRINTCENTER, "#Switch_To_BurstFire");
 		m_iWeaponState |= WPNSTATE_GLOCK18_BURST_MODE;
+		EMIT_SOUND(ENT(pev), CHAN_WEAPON, "weapons/switch.wav", VOL_NORM, ATTN_NORM);
 	}
 
 	m_flNextSecondaryAttack = UTIL_WeaponTimeBase() + 0.3f;

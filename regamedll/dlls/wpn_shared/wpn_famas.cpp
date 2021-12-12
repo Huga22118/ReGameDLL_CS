@@ -38,6 +38,7 @@ void CFamas::Precache()
 	PRECACHE_SOUND("weapons/famas_boltslap.wav");
 	PRECACHE_SOUND("weapons/famas_forearm.wav");
 	PRECACHE_SOUND("weapons/famas-burst.wav");
+	PRECACHE_SOUND("weapons/switch.wav");
 
 	m_iShell = PRECACHE_MODEL("models/rshell.mdl");
 	m_usFireFamas = PRECACHE_EVENT(1, "events/famas.sc");
@@ -78,11 +79,13 @@ void CFamas::SecondaryAttack()
 	{
 		ClientPrint(m_pPlayer->pev, HUD_PRINTCENTER, "#Switch_To_FullAuto");
 		m_iWeaponState &= ~WPNSTATE_FAMAS_BURST_MODE;
+		EMIT_SOUND(ENT(pev), CHAN_WEAPON, "weapons/switch.wav", VOL_NORM, ATTN_NORM);
 	}
 	else
 	{
 		ClientPrint(m_pPlayer->pev, HUD_PRINTCENTER, "#Switch_To_BurstFire");
 		m_iWeaponState |= WPNSTATE_FAMAS_BURST_MODE;
+		EMIT_SOUND(ENT(pev), CHAN_WEAPON, "weapons/switch.wav", VOL_NORM, ATTN_NORM);
 	}
 
 	m_flNextSecondaryAttack = UTIL_WeaponTimeBase() + 0.3f;
