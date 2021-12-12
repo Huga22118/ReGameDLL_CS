@@ -869,6 +869,7 @@ public:
 	float m_flGaitMovement;
 	int m_iAutoWepSwitch;
 	bool m_bVGUIMenus;
+	bool m_ProgressBarWhenReloading;
 	bool m_bShowHints;
 	bool m_bShieldDrawn;
 	bool m_bOwnsShield;

@@ -185,9 +185,10 @@ void CP228::Reload()
 	if (m_pPlayer->ammo_357sig <= 0)
 		return;
 
-	if (DefaultReload(iMaxClip(), m_pPlayer->HasShield() ? P228_SHIELD_RELOAD : P228_RELOAD, P228_RELOAD_TIME))
+	if (DefaultReload(iMaxClip(), m_pPlayer->HasShield() ? P228_SHIELD_RELOAD : P228_RELOAD, P228_RELOAD_TIME) && (m_pPlayer->m_ProgressBarWhenReloading = progressbar_when_reload.value))
 	{
 		m_pPlayer->SetAnimation(PLAYER_RELOAD);
+		m_pPlayer->SetProgressBarTime(P228_RELOAD_TIME);
 		m_flAccuracy = 0.9f;
 	}
 }

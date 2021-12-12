@@ -269,9 +269,10 @@ void CGLOCK18::Reload()
 	else
 		iResult = GLOCK18_RELOAD2;
 
-	if (DefaultReload(iMaxClip(), iResult, GLOCK18_RELOAD_TIME))
+	if (DefaultReload(iMaxClip(), iResult, GLOCK18_RELOAD_TIME) && (m_pPlayer->m_ProgressBarWhenReloading = progressbar_when_reload.value))
 	{
 		m_pPlayer->SetAnimation(PLAYER_RELOAD);
+		m_pPlayer->SetProgressBarTime(GLOCK18_RELOAD_TIME);
 		m_flAccuracy = 0.9;
 	}
 }

@@ -232,9 +232,10 @@ void CM4A1::Reload()
 	if (m_pPlayer->ammo_556nato <= 0)
 		return;
 
-	if (DefaultReload(iMaxClip(), ((m_iWeaponState & WPNSTATE_M4A1_SILENCED) == WPNSTATE_M4A1_SILENCED) ? M4A1_RELOAD : M4A1_UNSIL_RELOAD, M4A1_RELOAD_TIME))
+	if (DefaultReload(iMaxClip(), ((m_iWeaponState & WPNSTATE_M4A1_SILENCED) == WPNSTATE_M4A1_SILENCED) ? M4A1_RELOAD : M4A1_UNSIL_RELOAD, M4A1_RELOAD_TIME) && (m_pPlayer->m_ProgressBarWhenReloading = progressbar_when_reload.value))
 	{
 		m_pPlayer->SetAnimation(PLAYER_RELOAD);
+		m_pPlayer->SetProgressBarTime(M4A1_RELOAD_TIME);
 
 		m_flAccuracy = 0.2f;
 		m_iShotsFired = 0;

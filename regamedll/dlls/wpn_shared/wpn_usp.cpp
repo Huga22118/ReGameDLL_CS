@@ -256,9 +256,10 @@ void CUSP::Reload()
 	else
 		iAnim = USP_UNSIL_RELOAD;
 
-	if (DefaultReload(iMaxClip(), iAnim, USP_RELOAD_TIME))
+	if (DefaultReload(iMaxClip(), iAnim, USP_RELOAD_TIME) && (m_pPlayer->m_ProgressBarWhenReloading = progressbar_when_reload.value))
 	{
 		m_pPlayer->SetAnimation(PLAYER_RELOAD);
+		m_pPlayer->SetProgressBarTime(USP_RELOAD_TIME);
 		m_flAccuracy = 0.92f;
 	}
 }

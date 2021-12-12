@@ -176,9 +176,10 @@ void CM249::Reload()
 		return;
 #endif
 
-	if (DefaultReload(iMaxClip(), M249_RELOAD, M249_RELOAD_TIME))
+	if (DefaultReload(iMaxClip(), M249_RELOAD, M249_RELOAD_TIME) && (m_pPlayer->m_ProgressBarWhenReloading = progressbar_when_reload.value))
 	{
 		m_pPlayer->SetAnimation(PLAYER_RELOAD);
+		m_pPlayer->SetProgressBarTime(M249_RELOAD_TIME);
 
 		m_flAccuracy = 0.2f;
 		m_bDelayFire = false;

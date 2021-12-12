@@ -182,9 +182,10 @@ void CGalil::Reload()
 		return;
 #endif
 
-	if (DefaultReload(iMaxClip(), GALIL_RELOAD, GALIL_RELOAD_TIME))
+	if (DefaultReload(iMaxClip(), GALIL_RELOAD, GALIL_RELOAD_TIME) && (m_pPlayer->m_ProgressBarWhenReloading = progressbar_when_reload.value))
 	{
 		m_pPlayer->SetAnimation(PLAYER_RELOAD);
+		m_pPlayer->SetProgressBarTime(GALIL_RELOAD_TIME);
 
 		m_flAccuracy = 0.2f;
 		m_iShotsFired = 0;

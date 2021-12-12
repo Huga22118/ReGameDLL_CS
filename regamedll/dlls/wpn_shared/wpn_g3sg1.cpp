@@ -194,16 +194,16 @@ void CG3SG1::Reload()
 	if (m_pPlayer->ammo_762nato <= 0)
 		return;
 
-	if (DefaultReload(iMaxClip(), G3SG1_RELOAD, G3SG1_RELOAD_TIME))
+	if (DefaultReload(iMaxClip(), G3SG1_RELOAD, G3SG1_RELOAD_TIME) && (m_pPlayer->m_ProgressBarWhenReloading = progressbar_when_reload.value))
 	{
 		m_flAccuracy = 0.2f;
 		m_pPlayer->SetAnimation(PLAYER_RELOAD);
-
-		if (m_pPlayer->pev->fov != DEFAULT_FOV)
-		{
-			m_pPlayer->m_iFOV = m_pPlayer->pev->fov = 15;
-			SecondaryAttack();
-		}
+		m_pPlayer->SetProgressBarTime(G3SG1_RELOAD_TIME);
+	}
+	if (m_pPlayer->pev->fov != DEFAULT_FOV)
+	{
+		m_pPlayer->m_iFOV = m_pPlayer->pev->fov = 15;
+		SecondaryAttack();
 	}
 }
 

@@ -173,9 +173,10 @@ void CP90::Reload()
 	if (m_pPlayer->ammo_57mm <= 0)
 		return;
 
-	if (DefaultReload(iMaxClip(), P90_RELOAD, P90_RELOAD_TIME))
+	if (DefaultReload(iMaxClip(), P90_RELOAD, P90_RELOAD_TIME) && (m_pPlayer->m_ProgressBarWhenReloading = progressbar_when_reload.value))
 	{
 		m_pPlayer->SetAnimation(PLAYER_RELOAD);
+		m_pPlayer->SetProgressBarTime(P90_RELOAD_TIME);
 
 		m_flAccuracy = 0.2f;
 		m_iShotsFired = 0;

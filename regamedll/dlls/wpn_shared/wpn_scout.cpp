@@ -192,15 +192,16 @@ void CSCOUT::Reload()
 		return;
 #endif
 
-	if (DefaultReload(iMaxClip(), SCOUT_RELOAD, SCOUT_RELOAD_TIME))
+	if (DefaultReload(iMaxClip(), SCOUT_RELOAD, SCOUT_RELOAD_TIME) && (m_pPlayer->m_ProgressBarWhenReloading = progressbar_when_reload.value))
 	{
-		if (m_pPlayer->pev->fov != DEFAULT_FOV)
-		{
-			m_pPlayer->pev->fov = m_pPlayer->m_iFOV = 15;
-			SecondaryAttack();
-		}
 
 		m_pPlayer->SetAnimation(PLAYER_RELOAD);
+		m_pPlayer->SetProgressBarTime(SCOUT_RELOAD_TIME);
+	}
+	if (m_pPlayer->pev->fov != DEFAULT_FOV)
+	{
+		m_pPlayer->pev->fov = m_pPlayer->m_iFOV = 15;
+		SecondaryAttack();
 	}
 }
 

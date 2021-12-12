@@ -170,9 +170,10 @@ void CUMP45::Reload()
 	if (m_pPlayer->ammo_45acp <= 0)
 		return;
 
-	if (DefaultReload(iMaxClip(), UMP45_RELOAD, UMP45_RELOAD_TIME))
+	if (DefaultReload(iMaxClip(), UMP45_RELOAD, UMP45_RELOAD_TIME) && (m_pPlayer->m_ProgressBarWhenReloading = progressbar_when_reload.value))
 	{
 		m_pPlayer->SetAnimation(PLAYER_RELOAD);
+		m_pPlayer->SetProgressBarTime(UMP45_RELOAD_TIME);
 
 		m_flAccuracy = 0.0f;
 		m_iShotsFired = 0;

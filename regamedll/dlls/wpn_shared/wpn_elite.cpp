@@ -208,9 +208,10 @@ void CELITE::Reload()
 	if (m_pPlayer->ammo_9mm <= 0)
 		return;
 
-	if (DefaultReload(iMaxClip(), ELITE_RELOAD, ELITE_RELOAD_TIME))
+	if (DefaultReload(iMaxClip(), ELITE_RELOAD, ELITE_RELOAD_TIME) && (m_pPlayer->m_ProgressBarWhenReloading = progressbar_when_reload.value))
 	{
 		m_pPlayer->SetAnimation(PLAYER_RELOAD);
+		m_pPlayer->SetProgressBarTime(ELITE_RELOAD_TIME);
 		m_flAccuracy = 0.88f;
 	}
 }

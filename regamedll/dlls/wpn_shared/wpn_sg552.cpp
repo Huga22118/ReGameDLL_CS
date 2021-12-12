@@ -185,17 +185,18 @@ void CSG552::Reload()
 	if (m_pPlayer->ammo_556nato <= 0)
 		return;
 
-	if (DefaultReload(iMaxClip(), SG552_RELOAD, SG552_RELOAD_TIME))
+	if (DefaultReload(iMaxClip(), SG552_RELOAD, SG552_RELOAD_TIME) && (m_pPlayer->m_ProgressBarWhenReloading = progressbar_when_reload.value))
 	{
-		if (m_pPlayer->m_iFOV != DEFAULT_FOV)
-		{
-			SecondaryAttack();
-		}
 
 		m_pPlayer->SetAnimation(PLAYER_RELOAD);
+		m_pPlayer->SetProgressBarTime(SG552_RELOAD_TIME);
 		m_flAccuracy = 0.2f;
 		m_iShotsFired = 0;
 		m_bDelayFire = false;
+	}
+	if (m_pPlayer->m_iFOV != DEFAULT_FOV)
+	{
+		SecondaryAttack();
 	}
 }
 

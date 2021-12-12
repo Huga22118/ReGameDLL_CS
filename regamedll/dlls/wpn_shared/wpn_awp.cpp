@@ -197,19 +197,22 @@ void CAWP::Reload()
 	if (m_pPlayer->ammo_338mag <= 0)
 		return;
 
-	if (DefaultReload(iMaxClip(), AWP_RELOAD, AWP_RELOAD_TIME))
+	if (DefaultReload(iMaxClip(), AWP_RELOAD, AWP_RELOAD_TIME) && (m_pPlayer->m_ProgressBarWhenReloading = progressbar_when_reload.value))
 	{
 		m_pPlayer->SetAnimation(PLAYER_RELOAD);
+		m_pPlayer->SetProgressBarTime(AWP_RELOAD_TIME);
+	}
 
-		if (m_pPlayer->pev->fov != DEFAULT_FOV)
-		{
-			m_pPlayer->m_iFOV = 10;
-			m_pPlayer->pev->fov = 10;
+	if (m_pPlayer->pev->fov != DEFAULT_FOV)
+	{
 
-			SecondaryAttack();
-		}
+		m_pPlayer->m_iFOV = 10;
+		m_pPlayer->pev->fov = 10;
+
+		SecondaryAttack();
 	}
 }
+
 
 void CAWP::WeaponIdle()
 {
@@ -231,3 +234,35 @@ float CAWP::GetMaxSpeed()
 	// Slower speed when zoomed in.
 	return AWP_MAX_SPEED_ZOOM;
 }
+
+
+/*void CAWP::Reload()
+{
+	if (m_pPlayer->ammo_338mag <= 0)
+		return;
+
+	if (DefaultReload(iMaxClip(), AWP_RELOAD, AWP_RELOAD_TIME) && (m_pPlayer->pev->fov = DEFAULT_FOV) && (m_pPlayer->m_ProgressBarWhenReloading = progressbar_when_reload.value))
+	{
+		m_pPlayer->SetAnimation(PLAYER_RELOAD);
+		m_pPlayer->SetProgressBarTime(AWP_RELOAD_TIME);
+
+		m_pPlayer->m_iFOV = 10;
+		m_pPlayer->pev->fov = 10;
+
+		SecondaryAttack();
+	}
+
+		else if (DefaultReload(iMaxClip(), AWP_RELOAD, AWP_RELOAD_TIME) && (m_pPlayer->pev->fov = DEFAULT_FOV))
+		{
+			m_pPlayer->SetAnimation(PLAYER_RELOAD);
+
+			m_pPlayer->m_iFOV = 10;
+			m_pPlayer->pev->fov = 10;
+
+			SecondaryAttack();
+
+
+	}
+
+	}
+*/

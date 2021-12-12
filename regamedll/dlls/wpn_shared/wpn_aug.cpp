@@ -186,18 +186,18 @@ void CAUG::Reload()
 	if (m_pPlayer->ammo_556nato <= 0)
 		return;
 
-	if (DefaultReload(iMaxClip(), AUG_RELOAD, AUG_RELOAD_TIME))
+	if (DefaultReload(iMaxClip(), AUG_RELOAD, AUG_RELOAD_TIME) && (m_pPlayer->m_ProgressBarWhenReloading = progressbar_when_reload.value))
 	{
 		m_pPlayer->SetAnimation(PLAYER_RELOAD);
-
-		if (m_pPlayer->m_iFOV != DEFAULT_FOV)
-		{
-			SecondaryAttack();
-		}
+		m_pPlayer->SetProgressBarTime(AUG_RELOAD_TIME);
 
 		m_flAccuracy = 0;
 		m_iShotsFired = 0;
 		m_bDelayFire = false;
+	}
+	if (m_pPlayer->m_iFOV != DEFAULT_FOV)
+	{
+		SecondaryAttack();
 	}
 }
 

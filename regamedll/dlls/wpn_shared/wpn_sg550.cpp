@@ -197,15 +197,15 @@ void CSG550::Reload()
 	if (m_pPlayer->ammo_556nato <= 0)
 		return;
 
-	if (DefaultReload(iMaxClip(), SG550_RELOAD, SG550_RELOAD_TIME))
+	if (DefaultReload(iMaxClip(), SG550_RELOAD, SG550_RELOAD_TIME) && (m_pPlayer->m_ProgressBarWhenReloading = progressbar_when_reload.value))
 	{
 		m_pPlayer->SetAnimation(PLAYER_RELOAD);
-
-		if (m_pPlayer->pev->fov != DEFAULT_FOV)
-		{
-			m_pPlayer->m_iFOV = m_pPlayer->pev->fov = 15;
-			SecondaryAttack();
-		}
+		m_pPlayer->SetProgressBarTime(SG550_RELOAD_TIME);
+	}
+	if (m_pPlayer->pev->fov != DEFAULT_FOV)
+	{
+		m_pPlayer->m_iFOV = m_pPlayer->pev->fov = 15;
+		SecondaryAttack();
 	}
 }
 

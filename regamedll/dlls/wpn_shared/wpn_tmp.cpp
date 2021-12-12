@@ -167,9 +167,10 @@ void CTMP::Reload()
 		return;
 #endif
 
-	if (DefaultReload(iMaxClip(), TMP_RELOAD, TMP_RELOAD_TIME))
+	if (DefaultReload(iMaxClip(), TMP_RELOAD, TMP_RELOAD_TIME) && (m_pPlayer->m_ProgressBarWhenReloading = progressbar_when_reload.value))
 	{
 		m_pPlayer->SetAnimation(PLAYER_RELOAD);
+		m_pPlayer->SetProgressBarTime(TMP_RELOAD_TIME);
 
 		m_flAccuracy = 0.2f;
 		m_iShotsFired = 0;
