@@ -2008,6 +2008,7 @@ void CBasePlayer::SendFOV(int fov)
 	pev->fov = real_t(fov);
 	m_iClientFOV = fov;
 	m_iFOV = fov;
+	fov = DEFAULT_FOV;
 
 	MESSAGE_BEGIN(MSG_ONE, gmsgSetFOV, nullptr, pev);
 		WRITE_BYTE(fov);
@@ -2102,6 +2103,11 @@ void EXT_FUNC CBasePlayer::__API_HOOK(Killed)(entvars_t *pevAttacker, int iGib)
 
 			pObserver->m_bNightVisionOn = false;
 		}
+
+#ifdef REGAMEDLL_FIXES
+		if (pObserver->m_hObserverTarget == this)
+			pObserver->m_flNextFollowTime = 0.0f;
+#endif
 	}
 
 	if (m_pTank)
@@ -4418,7 +4424,7 @@ void EXT_FUNC CBasePlayer::__API_HOOK(PreThink)()
 
 	// Debounced button codes for pressed/released
 	// UNDONE: Do we need auto-repeat?
-	m_afButtonPressed  = (buttonsChanged & pev->button);		// The changed ones still down are "pressed"
+	m_afButtonPressed = (buttonsChanged & pev->button);		// The changed ones still down are "pressed"
 	m_afButtonReleased = (buttonsChanged & (~pev->button));		// The ones not down are "released"
 
 	// Hint messages should be updated even if the game is over
@@ -4646,6 +4652,14 @@ void EXT_FUNC CBasePlayer::__API_HOOK(PreThink)()
 	{
 		Duck();
 	}
+
+	if (m_bDuckOverride)
+  {
+	     if (pmove->bInDuck && (pev->button & IN_DUCK) && m_bDuckOverride)
+	     {
+	 	     Duck();
+	     }
+  }
 
 	if (!(pev->flags & FL_ONGROUND))
 	{
