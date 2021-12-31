@@ -2008,7 +2008,6 @@ void CBasePlayer::SendFOV(int fov)
 	pev->fov = real_t(fov);
 	m_iClientFOV = fov;
 	m_iFOV = fov;
-	fov = DEFAULT_FOV;
 
 	MESSAGE_BEGIN(MSG_ONE, gmsgSetFOV, nullptr, pev);
 		WRITE_BYTE(fov);
